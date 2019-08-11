@@ -1,26 +1,41 @@
 import React from 'react';
-import logo from './logo.svg';
+import {Button, Checkbox} from 'antd'
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  state = {
+    books: [{
+      bookName: 'Call Me By Your Name',
+      read: false, 
+      readBy:''
+    }]
+  }
+
+  render() {
+    const {books} = this.state
+    return (
+      <div className="App">
+        <header className="App-header">
+          biblio 
+        </header>
+        <Button>add a book</Button>
+        {books.map((t,i) => {
+          return <Book key ={i} {...t}
+            bookRead={(e)=>console.log(e)}
+          />
+        })}
+      </div>
+    );
+  }
+}
+
+function Book({bookName, read, readBy, bookRead, setReadBy}) {
+  return (<div className="book">
+    <Checkbox checked={read} onChange={bookRead} />
+    <span className="book-title">{bookName}</span>
+    <span className="book-readby">{readBy}</span>
+  </div>)
 }
 
 export default App;
